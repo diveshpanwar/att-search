@@ -12,17 +12,83 @@ $(document).ready(function() {
         case 'en':
           newOuterHTML = chipOuterHTML
             .replace('data-kw="keyword"', 'data-en="entity"')
-            .replace('data-in="intent"', 'data-en="entity"');
+            .replace('data-in="intent"', 'data-en="entity"')
+            .replace('data-ke="keyword entity"', 'data-en="entity"')
+            .replace('data-ki="keyword intent"', 'data-en="entity"')
+            .replace('data-ei="entity intent"', 'data-en="entity"')
+            .replace('data-kei="keyword entity intent"', 'data-en="entity"');
           break;
         case 'in':
           newOuterHTML = chipOuterHTML
             .replace('data-kw="keyword"', 'data-in="intent"')
-            .replace('data-en="entity"', 'data-in="intent"');
+            .replace('data-en="entity"', 'data-in="intent"')
+            .replace('data-ke="keyword entity"', 'data-in="intent"')
+            .replace('data-ki="keyword intent"', 'data-in="intent"')
+            .replace('data-ei="entity intent"', 'data-in="intent"')
+            .replace('data-kei="keyword entity intent"', 'data-in="intent"');
           break;
         case 'kw':
           newOuterHTML = chipOuterHTML
+            .replace('data-en="entity"', 'data-kw="keyword"')
             .replace('data-in="intent"', 'data-kw="keyword"')
-            .replace('data-en="entity"', 'data-kw="keyword"');
+            .replace('data-ke="keyword entity"', 'data-kw="keyword"')
+            .replace('data-ki="keyword intent"', 'data-kw="keyword"')
+            .replace('data-ei="entity intent"', 'data-kw="keyword"')
+            .replace('data-kei="keyword entity intent"', 'data-kw="keyword"');
+          break;
+        case 'ki':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-ki="keyword intent"')
+            .replace('data-in="intent"', 'data-ki="keyword intent"')
+            .replace('data-ke="keyword entity"', 'data-ki="keyword intent"')
+            .replace('data-en="entity"', 'data-ki="keyword intent"')
+            .replace('data-ei="entity intent"', 'data-ki="keyword intent"')
+            .replace(
+              'data-kei="keyword entity intent"',
+              'data-ki="keyword intent"'
+            );
+          break;
+        case 'ke':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-ke="keyword entity"')
+            .replace('data-in="intent"', 'data-ke="keyword entity"')
+            .replace('data-en="entity"', 'data-ke="keyword entity"')
+            .replace('data-ki="keyword intent"', 'data-ke="keyword entity"')
+            .replace('data-ei="entity intent"', 'data-ke="keyword entity"')
+            .replace(
+              'data-kei="keyword entity intent"',
+              'data-ke="keyword entity"'
+            );
+          break;
+        case 'ei':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-ei="entity intent"')
+            .replace('data-in="intent"', 'data-ei="entity intent"')
+            .replace('data-ke="keyword entity"', 'data-ei="entity intent"')
+            .replace('data-ki="keyword intent"', 'data-ei="entity intent"')
+            .replace('data-en="entity"', 'data-ei="entity intent"')
+            .replace(
+              'data-kei="keyword entity intent"',
+              'data-ei="entity intent"'
+            );
+          break;
+        case 'kei':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-kei="keyword entity intent"')
+            .replace('data-in="intent"', 'data-kei="keyword entity intent"')
+            .replace(
+              'data-ke="keyword entity"',
+              'data-kei="keyword entity intent"'
+            )
+            .replace(
+              'data-ki="keyword intent"',
+              'data-kei="keyword entity intent"'
+            )
+            .replace(
+              'data-ei="entity intent"',
+              'data-kei="keyword entity intent"'
+            )
+            .replace('data-en="entity"', 'data-kei="keyword entity intent"');
           break;
       }
       chip.outerHTML = newOuterHTML;
@@ -72,9 +138,16 @@ $(document).ready(function() {
   $('select').formSelect();
 
   $('#setTagAction').click(function() {
-    selectedTagValue = $('#tagElementType')
-      .children('option:selected')
-      .val();
+    selectedTagValue = null;
+    let valuesSelected = $('#tagElementType').val();
+    if (valuesSelected.length == 2) {
+      selectedTagValue = valuesSelected[0][0] + valuesSelected[1][0];
+    } else if (valuesSelected.length == 1) {
+      selectedTagValue = valuesSelected[0];
+    } else if (valuesSelected.length == 3) {
+      selectedTagValue = 'kei';
+    }
+    console.log(selectedTagValue);
 
     var modalElem = $('#modal1');
     var modalInstance = M.Modal.getInstance(modalElem);
@@ -82,15 +155,25 @@ $(document).ready(function() {
     modalInstance.close();
   });
 
-  $(document).click(function(e) {      
+  $(document).click(function(e) {
+ 
     if (e.target.id.indexOf('chip-') !== -1) {
+      var uls = $('.select-wrapper ul').children();
       sessionStorage.setItem('chipId', e.target.id);
       if (e.target.outerHTML.indexOf('data-kw') !== -1) {
-        document.getElementById("tagElementType").value = 'kw';
+        document.getElementById('tagElementType').value = ['kw'];
       } else if (e.target.outerHTML.indexOf('data-en') !== -1) {
-        document.getElementById("tagElementType").value = 'en';
+        document.getElementById('tagElementType').value = ['en'];
       } else if (e.target.outerHTML.indexOf('data-in') !== -1) {
-        document.getElementById("tagElementType").value = 'in';
+        document.getElementById('tagElementType').value = ['in'];
+      } else if (e.target.outerHTML.indexOf('data-ke') !== -1) {
+        document.getElementById('tagElementType').value = ['kw', 'en'];
+      } else if (e.target.outerHTML.indexOf('data-ki') !== -1) {
+        document.getElementById('tagElementType').value = ['kw', 'in'];
+      } else if (e.target.outerHTML.indexOf('data-ei') !== -1) {
+        document.getElementById('tagElementType').value = ['en', 'in'];
+      } else if (e.target.outerHTML.indexOf('data-kei') !== -1) {
+        document.getElementById('tagElementType').value = ['kw', 'en', 'in'];
       }
     }
   });
@@ -114,10 +197,22 @@ $(document).ready(function() {
           searchCriteria.entities.push(elemText);
         } else if (element.outerHTML.indexOf('data-in') !== -1) {
           searchCriteria.intents.push(elemText);
+        } else if (element.outerHTML.indexOf('data-ki') !== -1) {
+          searchCriteria.keywords.push(elemText);
+          searchCriteria.intents.push(elemText);
+        } else if (element.outerHTML.indexOf('data-ke') !== -1) {
+          searchCriteria.keywords.push(elemText);
+          searchCriteria.entities.push(elemText);
+        } else if (element.outerHTML.indexOf('data-ei') !== -1) {
+          searchCriteria.entities.push(elemText);
+          searchCriteria.intents.push(elemText);
+        } else if (element.outerHTML.indexOf('data-kei') !== -1) {
+          searchCriteria.keywords.push(elemText);
+          searchCriteria.entities.push(elemText);
+          searchCriteria.intents.push(elemText);
         }
       }
     }
     console.log(searchCriteria);
   });
 });
-
