@@ -102,19 +102,20 @@ $(document).ready(function() {
 
   function chipAddCallback() {
     let orgHTML = this.$chips[this.chipsData.length - 1].outerHTML;
-    let chipCreated = this.chipsData[this.chipsData.length - 1].tag;
-    let newHTML = orgHTML.replace(
-      'div class="chip"',
-      `div href="#modal1" data-kw="keyword" id="chip-${chipId}" class="chip waves-effect waves-light modal-trigger"`
-    );
+    let newHTML = orgHTML
+      .replace(
+        'div class="chip"',
+        `div data-kw="keyword" id="chip-${chipId}" class="chip waves-effect waves-light"`
+      )
+      .replace(
+        '<i class="material-icons close">',
+        `<i class="material-icons close" href="javascript:void(0)" id="delete-${chipId}">`
+      );
     this.$chips[this.chipsData.length - 1].outerHTML = newHTML;
     chipId++;
+    $(init);
   }
-  function chipDeleteCallback(e) {
-    console.log('Chip Deleted!', e);
-    // e.preventDefault();
-    // e.stopPropagation();
-  }
+
   function chipSelectCallback() {
     selectedTagValue = null;
     window.selectedChipId = this._selectedChip[0].id;
@@ -125,14 +126,12 @@ $(document).ready(function() {
       placeholder: 'Enter a Keyword',
       secondaryPlaceholder: '+ Keyword',
       onChipAdd: chipAddCallback,
-      onChipDelete: chipDeleteCallback,
       onChipSelect: chipSelectCallback,
       autocompleteOptions: {
         data: {
           termination: null
         },
-        limit: Infinity,
-        minLength: 1
+        limit: Infinity
       }
     });
   }
@@ -174,6 +173,15 @@ $(document).ready(function() {
         $('#tagElementType').val(['en', 'in']);
       }
       $('#tagElementType').formSelect();
+      var modalElem = $('#modal1');
+      var modalInstance = M.Modal.getInstance(modalElem);
+      setChip = true;
+      modalInstance.open();
+    } else if (e.target.id.indexOf('delete-') !== -1) {
+      e.stopPropagation();
+      e.preventDefault();
+      let delid = e.target.id.split('-');
+      $(`#chip-${delid[1]}`).remove();
     }
   });
 
@@ -214,4 +222,8 @@ $(document).ready(function() {
     }
     console.log(searchCriteria);
   });
+
+  function deleteChip(chipId) {
+    $(`#chip-${chipId}`).remove();
+  }
 });
