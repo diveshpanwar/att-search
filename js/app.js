@@ -1,10 +1,3 @@
-const chip = `
-<div class="chip">
-%chipName%
-<i class="close material-icons">close</i>
-</div>
-`;
-
 $(document).ready(function() {
   var selectedTagValue = null;
   var chipId = 0;
@@ -92,6 +85,13 @@ $(document).ready(function() {
   $(document).click(function(e) {
     if (e.target.id.indexOf('chip-') !== -1) {
       sessionStorage.setItem('chipId', e.target.id);
+      if (e.target.outerHTML.indexOf('data-kw') !== -1) {
+        document.getElementById("tagElementType").value = 'kw';
+      } else if (e.target.outerHTML.indexOf('data-en') !== -1) {
+        document.getElementById("tagElementType").value = 'en';
+      } else if (e.target.outerHTML.indexOf('data-in') !== -1) {
+        document.getElementById("tagElementType").value = 'in';
+      }
     }
   });
 

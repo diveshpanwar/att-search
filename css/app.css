@@ -3,8 +3,16 @@
     padding: 5px;
 }
 
+.chip {
+    font-size: 13px;
+    line-height: 26px;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
 [data-kw]  {
-    border-color: #a6e22d;
+    border-color: #a6e22d!important;
+    border: 1px solid;
 }
 
 [data-kw]:after {
@@ -20,7 +28,8 @@
 }
 
 [data-en]  {
-    border-color: #e22dcc80;
+    border-color: #e22dcc80!important;
+    border: 1px solid;
 }
 
 [data-en]:after {
@@ -36,7 +45,8 @@
 }
 
 [data-in]  {
-    border-color: #00bcd4;
+    border-color: #00bcd4!important;
+    border: 1px solid;
 }
 
 [data-in]:after {
