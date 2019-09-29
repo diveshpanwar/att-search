@@ -1,5 +1,5 @@
 .modal {
-    max-height: 227px;
+    max-height: 219px;
     padding: 5px;
 }
 
@@ -8,6 +8,34 @@
     line-height: 26px;
     font-family: monospace;
     font-weight: bolder;
+}
+
+
+.custom-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(1.2em + .75rem + 2px);
+    padding: .375rem 1.75rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.custom-select-lg {
+    height: calc(1.5em + 1rem + 2px);
+    font-weight: 600;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
 }
 
 [data-kw]  {
@@ -66,3 +94,14 @@
     margin-top: 20px;
     cursor: pointer;
 }
+
+
+#tagElementType option {
+    font-weight: normal!important;
+    display: block!important;
+    white-space: pre!important;
+    min-height: 1.2em!important;
+    padding: 0px 2px 1px!important;
+    border-radius: 5px!important;
+}
+

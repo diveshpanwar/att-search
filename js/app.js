@@ -82,7 +82,7 @@ $(document).ready(function() {
     modalInstance.close();
   });
 
-  $(document).click(function(e) {
+  $(document).click(function(e) {      
     if (e.target.id.indexOf('chip-') !== -1) {
       sessionStorage.setItem('chipId', e.target.id);
       if (e.target.outerHTML.indexOf('data-kw') !== -1) {
@@ -120,3 +120,4 @@ $(document).ready(function() {
     console.log(searchCriteria);
   });
 });
+
