@@ -118,7 +118,6 @@ $(document).ready(function() {
 
   function chipSelectCallback() {
     selectedTagValue = null;
-    window.selectedChipId = this._selectedChip[0].id;
   }
 
   function init() {
