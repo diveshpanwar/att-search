@@ -1,5 +1,5 @@
 .modal {
-    max-height: 33%;
+    max-height: 227px;
     padding: 5px;
 }
 
@@ -9,6 +9,7 @@
 
 [data-kw]:after {
     background: #a6e22d;
+    text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-kw);
     padding: 3px 5px;
@@ -24,6 +25,7 @@
 
 [data-en]:after {
     background: #e22dcc80;
+    text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-en);
     padding: 3px 5px;
@@ -39,6 +41,7 @@
 
 [data-in]:after {
     background: #00bcd4;
+    text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-in);
     padding: 3px 5px;
@@ -46,4 +49,10 @@
     border-radius: 5px;
     font-size: 10px;
     font-weight: bold;
+}
+
+#searchIcon {
+    position: absolute;
+    margin-top: 20px;
+    cursor: pointer;
 }

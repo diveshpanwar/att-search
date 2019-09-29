@@ -94,4 +94,29 @@ $(document).ready(function() {
       sessionStorage.setItem('chipId', e.target.id);
     }
   });
+
+  $('#searchIcon').click(function() {
+    console.log('I am clicked');
+    let searchCriteria = {
+      intents: [],
+      entities: [],
+      keywords: []
+    };
+    let chips = $('#tagChips');
+    let chipChildren = chips.children();
+    for (let i = 0; i < chipChildren.length; i++) {
+      const element = chipChildren[i];
+      const elemText = element.innerText.slice(0, element.innerText.length - 6);
+      if (element.id.indexOf('chip') !== -1) {
+        if (element.outerHTML.indexOf('data-kw') !== -1) {
+          searchCriteria.keywords.push(elemText);
+        } else if (element.outerHTML.indexOf('data-en') !== -1) {
+          searchCriteria.entities.push(elemText);
+        } else if (element.outerHTML.indexOf('data-in') !== -1) {
+          searchCriteria.intents.push(elemText);
+        }
+      }
+    }
+    console.log(searchCriteria);
+  });
 });
