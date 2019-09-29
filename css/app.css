@@ -90,12 +90,12 @@
 }
 
 [data-ei]  {
-    border-color: #a6e22d!important;
+    border-color: #00d468!important;
     border: 1px solid;
 }
 
 [data-ei]:after {
-    background: #a6e22d;
+    background: #00d468;
     text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-ei);
@@ -107,12 +107,12 @@
 }
 
 [data-ki]  {
-    border-color: #e22dcc80!important;
+    border-color: #ffc107e6!important;
     border: 1px solid;
 }
 
 [data-ki]:after {
-    background: #e22dcc80;
+    background: #ffc107e6;
     text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-ki);
@@ -124,12 +124,12 @@
 }
 
 [data-ke]  {
-    border-color: #00bcd4!important;
+    border-color: #fd7e14!important;
     border: 1px solid;
 }
 
 [data-ke]:after {
-    background: #00bcd4;
+    background: #fd7e14;
     text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-ke);
@@ -141,12 +141,12 @@
 }
 
 [data-kei]  {
-    border-color: #00bcd4!important;
+    border-color: #6f42c1!important;
     border: 1px solid;
 }
 
 [data-kei]:after {
-    background: #00bcd4;
+    background: #6f42c1;
     text-transform: uppercase;
     box-sizing: border-box;
     content: attr(data-kei);

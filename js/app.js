@@ -110,8 +110,10 @@ $(document).ready(function() {
     this.$chips[this.chipsData.length - 1].outerHTML = newHTML;
     chipId++;
   }
-  function chipDeleteCallback() {
-    console.log('Chip Deleted!');
+  function chipDeleteCallback(e) {
+    console.log('Chip Deleted!', e);
+    // e.preventDefault();
+    // e.stopPropagation();
   }
   function chipSelectCallback() {
     selectedTagValue = null;
@@ -147,8 +149,6 @@ $(document).ready(function() {
     } else if (valuesSelected.length == 3) {
       selectedTagValue = 'kei';
     }
-    console.log(selectedTagValue);
-
     var modalElem = $('#modal1');
     var modalInstance = M.Modal.getInstance(modalElem);
     setChip = true;
@@ -156,25 +156,24 @@ $(document).ready(function() {
   });
 
   $(document).click(function(e) {
- 
     if (e.target.id.indexOf('chip-') !== -1) {
-      var uls = $('.select-wrapper ul').children();
       sessionStorage.setItem('chipId', e.target.id);
-      if (e.target.outerHTML.indexOf('data-kw') !== -1) {
-        document.getElementById('tagElementType').value = ['kw'];
+      if (e.target.outerHTML.indexOf('data-kei') !== -1) {
+        $('#tagElementType').val(['kw', 'en', 'in']);
+      } else if (e.target.outerHTML.indexOf('data-kw') !== -1) {
+        $('#tagElementType').val(['kw']);
       } else if (e.target.outerHTML.indexOf('data-en') !== -1) {
-        document.getElementById('tagElementType').value = ['en'];
+        $('#tagElementType').val(['en']);
       } else if (e.target.outerHTML.indexOf('data-in') !== -1) {
-        document.getElementById('tagElementType').value = ['in'];
+        $('#tagElementType').val(['in']);
       } else if (e.target.outerHTML.indexOf('data-ke') !== -1) {
-        document.getElementById('tagElementType').value = ['kw', 'en'];
+        $('#tagElementType').val(['kw', 'en']);
       } else if (e.target.outerHTML.indexOf('data-ki') !== -1) {
-        document.getElementById('tagElementType').value = ['kw', 'in'];
+        $('#tagElementType').val(['kw', 'in']);
       } else if (e.target.outerHTML.indexOf('data-ei') !== -1) {
-        document.getElementById('tagElementType').value = ['en', 'in'];
-      } else if (e.target.outerHTML.indexOf('data-kei') !== -1) {
-        document.getElementById('tagElementType').value = ['kw', 'en', 'in'];
+        $('#tagElementType').val(['en', 'in']);
       }
+      $('#tagElementType').formSelect();
     }
   });
 
@@ -191,7 +190,11 @@ $(document).ready(function() {
       const element = chipChildren[i];
       const elemText = element.innerText.slice(0, element.innerText.length - 6);
       if (element.id.indexOf('chip') !== -1) {
-        if (element.outerHTML.indexOf('data-kw') !== -1) {
+        if (element.outerHTML.indexOf('data-kei') !== -1) {
+          searchCriteria.keywords.push(elemText);
+          searchCriteria.entities.push(elemText);
+          searchCriteria.intents.push(elemText);
+        } else if (element.outerHTML.indexOf('data-kw') !== -1) {
           searchCriteria.keywords.push(elemText);
         } else if (element.outerHTML.indexOf('data-en') !== -1) {
           searchCriteria.entities.push(elemText);
@@ -204,10 +207,6 @@ $(document).ready(function() {
           searchCriteria.keywords.push(elemText);
           searchCriteria.entities.push(elemText);
         } else if (element.outerHTML.indexOf('data-ei') !== -1) {
-          searchCriteria.entities.push(elemText);
-          searchCriteria.intents.push(elemText);
-        } else if (element.outerHTML.indexOf('data-kei') !== -1) {
-          searchCriteria.keywords.push(elemText);
           searchCriteria.entities.push(elemText);
           searchCriteria.intents.push(elemText);
         }
