@@ -9,28 +9,32 @@ $(document).ready(function() {
   var selectedTagValue = null;
   var chipId = 0;
   var selectedChipId = null;
+  var setChip = false;
   function onModalCloseEndCallback() {
-    let chip = document.getElementById(`${sessionStorage.getItem('chipId')}`);
-    let chipOuterHTML = chip.outerHTML;
-    let newOuterHTML = null;
-    switch (selectedTagValue) {
-      case 'en':
-        newOuterHTML = chipOuterHTML
-          .replace('data-kw="keyword"', 'data-en="entity"')
-          .replace('data-in="intent"', 'data-en="entity"');
-        break;
-      case 'in':
-        newOuterHTML = chipOuterHTML
-          .replace('data-kw="keyword"', 'data-in="intent"')
-          .replace('data-en="entity"', 'data-in="intent"');
-        break;
-      case 'kw':
-        newOuterHTML = chipOuterHTML
-          .replace('data-in="intent"', 'data-kw="keyword"')
-          .replace('data-en="entity"', 'data-kw="keyword"');
-        break;
+    if (setChip) {
+      let chip = document.getElementById(`${sessionStorage.getItem('chipId')}`);
+      let chipOuterHTML = chip.outerHTML;
+      let newOuterHTML = null;
+      switch (selectedTagValue) {
+        case 'en':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-en="entity"')
+            .replace('data-in="intent"', 'data-en="entity"');
+          break;
+        case 'in':
+          newOuterHTML = chipOuterHTML
+            .replace('data-kw="keyword"', 'data-in="intent"')
+            .replace('data-en="entity"', 'data-in="intent"');
+          break;
+        case 'kw':
+          newOuterHTML = chipOuterHTML
+            .replace('data-in="intent"', 'data-kw="keyword"')
+            .replace('data-en="entity"', 'data-kw="keyword"');
+          break;
+      }
+      chip.outerHTML = newOuterHTML;
+      setChip = false;
     }
-    chip.outerHTML = newOuterHTML;
   }
 
   $('.modal').modal({
@@ -81,6 +85,7 @@ $(document).ready(function() {
 
     var modalElem = $('#modal1');
     var modalInstance = M.Modal.getInstance(modalElem);
+    setChip = true;
     modalInstance.close();
   });
 
