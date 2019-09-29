@@ -158,18 +158,25 @@ $(document).ready(function() {
       sessionStorage.setItem('chipId', e.target.id);
       if (e.target.outerHTML.indexOf('data-kei') !== -1) {
         $('#tagElementType').val(['kw', 'en', 'in']);
+        selectedTagValue = 'kei';
       } else if (e.target.outerHTML.indexOf('data-kw') !== -1) {
         $('#tagElementType').val(['kw']);
+        selectedTagValue = 'kw';
       } else if (e.target.outerHTML.indexOf('data-en') !== -1) {
         $('#tagElementType').val(['en']);
+        selectedTagValue = 'en';
       } else if (e.target.outerHTML.indexOf('data-in') !== -1) {
         $('#tagElementType').val(['in']);
+        selectedTagValue = 'in';
       } else if (e.target.outerHTML.indexOf('data-ke') !== -1) {
         $('#tagElementType').val(['kw', 'en']);
+        selectedTagValue = 'ke';
       } else if (e.target.outerHTML.indexOf('data-ki') !== -1) {
         $('#tagElementType').val(['kw', 'in']);
+        selectedTagValue = 'ki';
       } else if (e.target.outerHTML.indexOf('data-ei') !== -1) {
         $('#tagElementType').val(['en', 'in']);
+        selectedTagValue = 'ei';
       }
       $('#tagElementType').formSelect();
       var modalElem = $('#modal1');
