@@ -1,0 +1,49 @@
+.modal {
+    max-height: 33%;
+    padding: 5px;
+}
+
+[data-kw]  {
+    border-color: #a6e22d;
+}
+
+[data-kw]:after {
+    background: #a6e22d;
+    box-sizing: border-box;
+    content: attr(data-kw);
+    padding: 3px 5px;
+    margin-left: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+[data-en]  {
+    border-color: #e22dcc80;
+}
+
+[data-en]:after {
+    background: #e22dcc80;
+    box-sizing: border-box;
+    content: attr(data-en);
+    padding: 3px 5px;
+    margin-left: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+[data-in]  {
+    border-color: #00bcd4;
+}
+
+[data-in]:after {
+    background: #00bcd4;
+    box-sizing: border-box;
+    content: attr(data-in);
+    padding: 3px 5px;
+    margin-left: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
